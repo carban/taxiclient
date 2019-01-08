@@ -1,4 +1,4 @@
-/*SQL SCRIPT FOR DS1*/
+/*SQL SCRIPT FOR DB1*/
 /*VERSION 1*/
 /* Delete the tables if they already exist */
 drop table if exists client;
