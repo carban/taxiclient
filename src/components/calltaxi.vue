@@ -23,7 +23,7 @@
                 </select>
               </div>
               <div class="col">
-                <button v-on:click.prevent="mapinfo" class="btn btn-success btn-block disabled">Travel</button>
+                <button class="btn btn-success btn-block">Travel</button>
               </div>
             </div>
           </form>
@@ -45,9 +45,6 @@ export default {
     }
   },
   methods: {
-    mapinfo(){
-      this.$store.dispatch('infoMap');
-    },
     setOrigin(coor){
       this.$store.commit('setOrigin', coor);
     },

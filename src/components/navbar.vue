@@ -39,38 +39,38 @@
 <script>
 export default {
   computed: {
-    loggedIn(){
+    loggedIn() {
       return this.$store.getters.loggedIn;
     }
   },
-  data(){
-    return {
-
-    }
+  data() {
+    return {};
   },
   methods: {
-    logout(){
-      this.$store.dispatch('logout')
+    logout() {
+      this.$store.dispatch("logout");
+      this.$store.commit("setOrigin", [0, 0]);
+      this.$store.commit("setDestiny", [0, 0]);
+
       //La redireccion deberia hacerse despues de que se ejecute la promesa
       //Como lo que se hizo en el Login
-      this.$router.push({name: 'home'});
+      this.$router.push({ name: "home" });
     }
   }
-}
+};
 </script>
 
 <style lang="css">
-  .navbar-yellow{
-    background-color: #FFC107;
-  }
-  .bb{
-    color: black;
-  }
-  .transparent{
-    background-color: #FFC107;
-  }
-  .logout{
-    margin-left:47px;
-  }
-
+.navbar-yellow {
+  background-color: #ffc107;
+}
+.bb {
+  color: black;
+}
+.transparent {
+  background-color: #ffc107;
+}
+.logout {
+  margin-left: 47px;
+}
 </style>

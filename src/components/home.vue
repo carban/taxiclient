@@ -32,4 +32,5 @@ export default {
   height: 600px;
   text-align: right;
 }
+
 </style>

@@ -9,7 +9,7 @@
       </div>
       <l-map id="myMap" ref="myMap" :min-zoom="minzoom" :max-zoom="maxzoom" :zoom="zoom" :center="center" v-on:click="print" class="row-lg-12">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-marker :lat-lng="marker" :icon="icon"></l-marker>
+        <!-- <l-marker :lat-lng="marker" :icon="icon"></l-marker> -->
         <!-- <l-marker v-for="(mark, err) in myMarkers" :key="err" :lat-lng="mark.coor"></l-marker> -->
         <l-marker :lat-lng="originCoor">
           <l-popup>
@@ -28,7 +28,7 @@
           :color="mypolyline.color">
         </l-polyline>
         <!--  -->
-        <l-marker v-for="(dat, index) in consultData" :key="index" :lat-lng="dat.coor"></l-marker>
+        <l-marker v-for="(dat, index) in consultData" :key="index" :lat-lng="dat.coor" :icon="icon"></l-marker>
         <!--  -->
         <!-- the modal -->
         <b-modal id="paymentModal" ref="paymentModal" title="Driver info" @ok="payment">
@@ -71,7 +71,7 @@ export default {
     mypolyline() {
       return {
         latlngs: [this.originCoor, this.destinyCoor],
-        color: 'red'
+        color: 'blue'
       }
     }
   },
@@ -96,13 +96,15 @@ export default {
   methods: {
     print(event){
       // this.myMarkers.push({ coor: L.latLng(event.latlng.lat, event.latlng.lng)});
-      // console.log(event);
+      console.log(event.latlng);
       this.$store.commit('setOrigin', event.latlng);
     },
     payment(){
       console.log('payment');
-      
-    }
+    },
+  },
+  beforeCreate(){
+    this.$store.dispatch('infoMap');
   },
   mounted() {
     /*
