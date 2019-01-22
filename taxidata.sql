@@ -7,7 +7,7 @@ drop table if exists drivers;
 CREATE EXTENSION postgis;
 /* Create the schema for our tables */
 /*USERS*/
-create table client (id_serial SERIAL, first_name varchar(30) NOT NULL, last_name varchar(30) NOT NULL, phone INTEGER PRIMARY KEY, password varchar(40) NOT NULL);
+create table client (first_name varchar(30) NOT NULL, last_name varchar(30) NOT NULL, phone INTEGER PRIMARY KEY, password varchar(40) NOT NULL, email varchar(50) NOT NULL, credit_card INTEGER NOT NULL);
 /*SEDES*/
 create table favorites (favid SERIAL, phone INTEGER, title varchar(30) NOT NULL);
 Select AddGeometryColumn('favorites', 'coor', 3725, 'POINT', 2);
@@ -16,8 +16,8 @@ create table drivers (driver_serial SERIAL, first_name varchar(30) NOT NULL, las
 Select AddGeometryColumn('drivers', 'coor', 3725, 'POINT', 2);
 
 /* Inserting our data on CLIENT*/
-insert into client values(1, 'charles', 'xavier', 76543, 'there');
-insert into client values(2, 'Luka', 'Modric', 88991, 'leon');
+insert into client values('charles', 'xavier', 76543, 'there', 'charles@xavier.com', 10021);
+insert into client values('Luka', 'Modric', 88991, 'leon', 'luka@modric.xom', 10023);
 
 /* Inserting our data on FAVORITES*/
 insert into favorites (phone, title, coor) values(76543, 'casa', ST_GeomFromText('POINT(3.4516 -76.5320)', 3725));

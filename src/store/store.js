@@ -121,6 +121,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log('Profile consulted');
         const decoded = jwtDecode(context.getters.token);
+        console.log(decoded);
         axios.post('http://localhost:8000/api/profile', decoded)
           .then(res => {
             context.commit('setProfile', res.data);
@@ -158,8 +159,8 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         //console.log(context.getters.token);
         const decoded = jwtDecode(context.getters.token);
-        const phoneNumber = context.getters.profile.phone;
-        const obj = {f_item: item, id_serial: decoded, phone: phoneNumber};
+        // const phoneNumber = context.getters.profile.phone;
+        const obj = {f_item: item, phone: decoded.phone};
         axios.post('http://localhost:8000/api/profile/new-favorite', obj)
           .then(res => {
             console.log(res.data);
@@ -174,7 +175,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         //console.log(context.getters.token);
         const decoded = jwtDecode(context.getters.token);
-        const obj = {fav: favID, id_serial: decoded};
+        const obj = {fav: favID, phone: decoded};
         axios.post('http://localhost:8000/api/profile/delete-favorite', obj)
           .then(res => {
             console.log(res.data);
@@ -189,7 +190,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         //console.log(context.getters.token);
         const decoded = jwtDecode(context.getters.token);
-        const object = {fav: obj.id, id_serial: decoded, newTitle: obj.newtitle};
+        const object = {fav: obj.id, phone: decoded, newTitle: obj.newtitle};
         axios.post('http://localhost:8000/api/profile/update-favorite', object)
           .then(res => {
             console.log(res.data);

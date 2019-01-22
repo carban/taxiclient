@@ -13,7 +13,8 @@
         <!-- <l-marker v-for="(mark, err) in myMarkers" :key="err" :lat-lng="mark.coor"></l-marker> -->
         <l-marker :lat-lng="originCoor">
           <l-popup>
-            <b-button variant="primary" v-b-modal.paymentModal>Ok Origin</b-button>
+            <!-- v-b-modal.paymentModal -->
+            <b-button variant="primary">Ok Origin</b-button>
           </l-popup>
         </l-marker>
         <!--  -->
@@ -30,11 +31,6 @@
         <!--  -->
         <l-marker v-for="(dat, index) in consultData" :key="index" :lat-lng="dat.coor" :icon="icon"></l-marker>
         <!--  -->
-        <!-- the modal -->
-        <b-modal id="paymentModal" ref="paymentModal" title="Driver info" @ok="payment">
-          <form>
-          </form>
-        </b-modal>
       </l-map>
     </div>
       <!-- <button-counter></button-counter> -->

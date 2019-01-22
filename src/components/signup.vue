@@ -22,6 +22,12 @@
                   <input type="number" v-model="user.phone" class="form-control" id="inlineFormInputGroupUsername" placeholder="Phone">
                 </div>
                 <div class="form-group">
+                  <input type="text" v-model="user.email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input type="text" v-model="user.credit_card" class="form-control" placeholder="Credit Card">
+                </div>
+                <div class="form-group">
                   <input type="password" v-model="user.password" class="form-control" placeholder="Password">
                 </div>
                 <div class="form-group">
@@ -48,6 +54,8 @@ export default {
         fname: null,
         lname: null,
         phone: null,
+        email: null,
+        credit_card: null,
         password: null,
         passConf: null
       },

@@ -23,7 +23,7 @@
                 </select>
               </div>
               <div class="col">
-                <button class="btn btn-success btn-block">Travel</button>
+                <button class="btn btn-success btn-block" v-on:click.prevent="travel">Travel</button>
               </div>
             </div>
           </form>
@@ -46,10 +46,22 @@ export default {
   },
   methods: {
     setOrigin(coor){
+      console.log(coor)
       this.$store.commit('setOrigin', coor);
     },
     setDestiny(coor){
+      console.log(coor)
       this.$store.commit('setDestiny', coor);
+    },
+    travel(){
+      console.log(this.Haversine(this.$store.getters.origin, this.$store.getters.destiny));
+    },
+    Haversine(p1, p2){
+      const earth_radio = 6356.752 ;
+      return 2*earth_radio*Math.asin(Math.sqrt(this.sin2((p2[0]-p1[0])/2)+Math.cos(p1[0])*Math.cos(p2[0])*this.sin2((p2[1]-p1[1])/2)))
+    },
+    sin2(n){
+      return Math.pow(Math.sin(n), 2);
     }
   },
   beforeCreate(){
@@ -60,8 +72,9 @@ export default {
 
 <style lang="css">
   .calltaxibg{
-    /* background: linear-gradient(to bottom, #fec007 0%, #e8e8e8 100%); */
-    background-color: #fec007;
+    background: linear-gradient(to bottom, #fec007 0%, #a8810000 99%);
+    /* background-color: yellow; */
+
   }
   .tag{
     margin-right: 0px;
