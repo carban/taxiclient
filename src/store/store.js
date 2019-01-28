@@ -132,6 +132,19 @@ export const store = new Vuex.Store({
           })
       });
     },
+    updateProfileInfo: (context, newProfile) => {
+      return new Promise((resolve, reject) => {
+        const decoded = jwtDecode(context.getters.token);
+        const object = {newProfile: newProfile, phone: decoded.phone}
+        axios.post('http://localhost:8000/api/update-profile', object)
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          })
+      });
+    },
     favoritesInfo: context => {
       return new Promise((resolve, reject) => {
         console.log('Favorites consulted');

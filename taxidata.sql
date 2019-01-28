@@ -17,7 +17,7 @@ Select AddGeometryColumn('drivers', 'coor', 3725, 'POINT', 2);
 
 /* Inserting our data on CLIENT*/
 insert into client values('charles', 'xavier', 76543, 'there', 'charles@xavier.com', 10021);
-insert into client values('Luka', 'Modric', 88991, 'leon', 'luka@modric.xom', 10023);
+insert into client values('Luka', 'Modric', 88991, 'leon', 'luka@modric.com', 10023);
 
 /* Inserting our data on FAVORITES*/
 insert into favorites (phone, title, coor) values(76543, 'casa', ST_GeomFromText('POINT(3.4516 -76.5320)', 3725));

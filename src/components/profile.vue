@@ -1,11 +1,12 @@
 <template lang="html">
-  <div class="container signup" id="content">
+  <div class="container prof" id="content">
+    <flash-message v-if="flashalert" class="" autoHide variant="success" transitionIn="animated rubberBand"></flash-message>
       <div class="row">
         <div class="col-md-12 col-lg-5" id="updater">
           <div class="card shadow-lg bg-white">
-            <div class="card-header">
+            <!-- <div class="card-header">
               <h2>Profile</h2>
-            </div>
+            </div> -->
             <div class="card-body">
 
               <b-card no-body class="mb-1">
@@ -14,18 +15,18 @@
                 </b-card-header>
                 <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
                   <b-card-body>
-                <form v-on:submit.prevent="">
+                <form v-on:submit.prevent="updateProfileInfo()">
+                  <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">+57</div>
+                    </div>
+                    <input type="number" v-model="user.phone" class="form-control" id="inlineFormInputGroupUsername" placeholder="Phone" disabled>
+                  </div>
                   <div class="form-group">
                     <input type="text" v-model="user.first_name" class="form-control" placeholder="First Name">
                   </div>
                   <div class="form-group">
                     <input type="text" v-model="user.last_name" class="form-control" placeholder="Last Name">
-                  </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">+57</div>
-                    </div>
-                    <input type="number" v-model="user.phone" class="form-control" id="inlineFormInputGroupUsername" placeholder="Phone">
                   </div>
                   <div class="form-group">
                     <input type="text" v-model="user.email" class="form-control" placeholder="Email">
@@ -34,7 +35,7 @@
                     <input type="text" v-model="user.credit_card" class="form-control" placeholder="Credit-card Number">
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-success btn-block">Update</button>
+                    <button class="btn btn-outline-success btn-block">Update</button>
                   </div>
                   </form>
                     </b-card-body>
@@ -42,7 +43,7 @@
               </b-card>
               <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                  <b-btn block href="#" v-b-toggle.accordion2 variant="primary">Favorite Placess</b-btn>
+                  <b-btn block href="#" v-b-toggle.accordion2 variant="primary">Favorite Places</b-btn>
                 </b-card-header>
                 <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
                   <b-card-body>
@@ -57,7 +58,7 @@
                       </div>
                     </b-card-body>
                 </b-collapse>
-              </b-card>              
+              </b-card>
 
                 <div class="form-group">
                   <div>
@@ -75,7 +76,14 @@
                     </b-modal>
                   </div>
                 </div>
-              </form>
+                  <b-btn v-b-modal.changePassword class="btn btn-outline-warning btn-block">Change password</b-btn>
+                  <b-modal id="changePassword" title="Change your password" @ok="">
+                    <div class="form-group">
+                      <input class="form-control" type="password" name="" value="" placeholder="New Password">
+                      </br>
+                      <input class="form-control" type="password" name="" value="" placeholder="Confirm Password">
+                    </div>
+                  </b-modal>
             </div>
           </div>
         </div>
@@ -129,7 +137,8 @@ export default {
       placeTitle: null,
       editingPlaceTitle: null,
       editingobj: null,
-      newMarker: L.latLng(0, 0)
+      newMarker: L.latLng(0, 0),
+      flashalert: false
     }
   },
   beforeCreate(){
@@ -153,6 +162,23 @@ export default {
     // })
   },
   methods: {
+    updateProfileInfo(){
+      var newProfile = {
+        first_name: this.user.first_name,
+        last_name: this.user.last_name,
+        email: this.user.email,
+        credit_card: this.user.credit_card
+      }
+      this.$store.dispatch('updateProfileInfo', newProfile)
+        .then(res => {
+          console.log(res.data.msg);
+          this.$store.dispatch('profileInfo')
+            .then(res => {
+              this.flashalert = true;
+              this.flashMe({ message: 'Profile Updated', variant: 'success' });
+            })
+        })
+    },
     showingPlace(i){
       //Se valida porque cuando se ejecuta el evento remove, tambien llama a showingPlace
       if (this.favorite_places[i]) {
@@ -206,12 +232,17 @@ export default {
     mapEvent(e){
       this.newMarker = [e.latlng.lat, e.latlng.lng];
     }
+  },
+  updated(){
+    setTimeout(() => {
+      this.flashalert = false;
+    }, 2000);
   }
 }
 </script>
 
 <style lang="css">
-  .signup{
+  .prof{
     margin-top: 25px;
   }
   .pdleft{
