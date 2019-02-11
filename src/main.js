@@ -10,6 +10,8 @@ import {store} from './store/store'
 
 import { L } from 'vue2-leaflet'
 import 'leaflet/dist/leaflet.css'
+//IMPORT FOR ROUTING MACHINE
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import VuexFlash from 'vuex-flash';
 //import VueFlashMessage from 'vue-flash-message';
 

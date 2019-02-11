@@ -18,8 +18,10 @@ export const store = new Vuex.Store({
     //   {id: 2, title: 'La casa de ella', coor: [3.3500, -76.5370]},
     // ]
     favorites: null,
-    origin: [0,0],
-    destiny: [0,0]
+    origin: [3.42882159671311, -76.54704415637336],
+    destiny: [3.4329340857995096, -76.48538692422893],
+    destinyAndTime: [],
+    firstTimeForAInterval: true
   },
   //Sirve para obtener datos del state
   getters: {
@@ -43,6 +45,12 @@ export const store = new Vuex.Store({
     },
     destiny: state => {
       return state.destiny;
+    },
+    destinyAndTime: state => {
+      return state.destinyAndTime;
+    },
+    firstTimeForAInterval: state => {
+      return state.firstTimeForAInterval;
     }
   },
   //Modifican los datos del estado
@@ -74,6 +82,13 @@ export const store = new Vuex.Store({
     },
     mapinfo: (state, data) => {
       state.mapdata = data;
+    },
+    destinyAndTime: (state, arr) => {
+      state.destinyAndTime = arr;
+      state.firstTimeForAInterval = !state.firstTimeForAInterval;
+    },
+    firstTimeForAInterval: (state) => {
+      state.firstTimeForAInterval = !state.firstTimeForAInterval;
     }
   },
   //Se utiliza para hacer llamadas al servidor
@@ -223,7 +238,10 @@ export const store = new Vuex.Store({
           for(var i in data){
             var lat = data[i].geom.coordinates[0];
             var lng = data[i].geom.coordinates[1];
-            array.push({coor: [lat, lng]});
+            var fname = data[i].first_name;
+            var lname = data[i].last_name;
+            var phone = data[i].phone;
+            array.push({coor: [lat, lng], fname, lname, phone});
           }
           //console.log(array);
           context.commit('mapinfo', array);

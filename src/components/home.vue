@@ -26,11 +26,4 @@ export default {
   font-size: 90px;
   margin-top: 155px;
 }
-
-#divHome{
-  top: 0px,auto;
-  height: 600px;
-  text-align: right;
-}
-
 </style>
