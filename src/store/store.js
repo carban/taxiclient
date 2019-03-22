@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     token: localStorage.getItem('access_token') || null,
     mapdata: [],
     profile: {first_name: null, last_name: null, phone: null},
+    driverData: {first_name: null, last_name: null, phone: null},
     // favorites: {title: null, coor: null},
     // favorites: [
     //   {id: 0, title: 'Casa', coor: [3.4516, -76.5320]},
@@ -21,7 +22,8 @@ export const store = new Vuex.Store({
     origin: [3.42882159671311, -76.54704415637336],
     destiny: [3.4329340857995096, -76.48538692422893],
     destinyAndTime: [],
-    firstTimeForAInterval: true
+    firstTimeForAInterval: true,
+    youllbeawoman: true
   },
   //Sirve para obtener datos del state
   getters: {
@@ -51,6 +53,12 @@ export const store = new Vuex.Store({
     },
     firstTimeForAInterval: state => {
       return state.firstTimeForAInterval;
+    },
+    youllbeawoman: state => {
+      return state.youllbeawoman;
+    },
+    driverData: state => {
+      return state.driverData;
     }
   },
   //Modifican los datos del estado
@@ -89,6 +97,12 @@ export const store = new Vuex.Store({
     },
     firstTimeForAInterval: (state) => {
       state.firstTimeForAInterval = !state.firstTimeForAInterval;
+    },
+    youllbeawoman: (state) => {
+      state.youllbeawoman = !state.youllbeawoman;
+    },
+    driverData: (state, data) => {
+      state.driverData = data;
     }
   },
   //Se utiliza para hacer llamadas al servidor
@@ -136,7 +150,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log('Profile consulted');
         const decoded = jwtDecode(context.getters.token);
-        console.log(decoded);
+        // console.log(decoded);
         axios.post('http://localhost:8000/api/profile', decoded)
           .then(res => {
             context.commit('setProfile', res.data);
@@ -228,6 +242,16 @@ export const store = new Vuex.Store({
             reject(err);
           })
       });
+    },
+    cercano: context => {
+      axios.post('http://localhost:8000/api/service', {coordenada: context.getters.origin})
+        .then(res => {
+          // console.log(res.data.rows[0]);
+          context.commit('driverData', res.data.rows[0]);
+        })
+        .catch(err => {
+          console.log(err);
+        })
     },
     infoMap: context => {
       axios.get('http://localhost:8000/api/map/info')

@@ -63,11 +63,11 @@
                     </tr>
                     <tr>
                       <td>Price per Km:</td>
-                      <td class="tdstyle"><b>${{price_per_km}}</b></td>
+                      <td class="tdstyle"><b>${{this.price_per_km}}</b></td>
                     </tr>
                     <tr class="list-group-item-success">
                       <td>Price:</td>
-                      <td class="tdstyle"><b>${{price}}</b></td>
+                      <td class="tdstyle"><b>${{this.price}}</b></td>
                     </tr>
                   </tbody>
                 </table>
@@ -94,6 +94,9 @@ export default {
       this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
       return res;
     },
+    driverData(){
+      return this.$store.getters.driverData;
+    }
   },
   data(){
     return {
@@ -102,7 +105,7 @@ export default {
       price: 0,
       price_per_km : 1000,
       fix: false,
-      driverData: {first_name: null, last_name: null, phone: null},
+      //driverData: {first_name: null, last_name: null, phone: null},
       taxiData: {model: null, plate: null}
     }
   },
@@ -127,7 +130,8 @@ export default {
       // }
       this.$store.commit('firstTimeForAInterval')
       //AQUI FUNCION PARA TRAER LA INFORMACION DEL CONDUCTOR Y VEHICULO MAS CERCANO
-      this.driverData =  {first_name: "fd", last_name: "dfdfd", phone: "fdhfj"};
+      this.$store.dispatch('cercano');
+      // this.driverData =  {first_name: "fd", last_name: "dfdfd", phone: "fdhfj"};
       this.taxiData = {model: "fgfgf", plate: "dsdsd"};
       // this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
       // this.distance = Math.floor(haversine(start, end)*100)/100;

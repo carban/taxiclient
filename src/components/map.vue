@@ -85,6 +85,7 @@ export default {
       if (!res) {
         // console.log(this.machineControl._routes[0].summary);
         this.$store.commit('destinyAndTime', [Math.ceil(this.machineControl._routes[0].summary.totalDistance/100)/10, Math.ceil(this.machineControl._routes[0].summary.totalTime/60)]);
+        // console.log(this.machineControl._routes[0]);
         // this.$store.commit('firstTimeForAInterval');
       }
       return res;
@@ -131,7 +132,7 @@ export default {
   methods: {
     print(event){
       // this.myMarkers.push({ coor: L.latLng(event.latlng.lat, event.latlng.lng)});
-      // console.log(event.latlng);
+      console.log(event.latlng);
       // this.$store.commit('setOrigin', event.latlng);
       this.menuCoor = [event.latlng.lat, event.latlng.lng];
     },
