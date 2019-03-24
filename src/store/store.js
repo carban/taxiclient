@@ -153,6 +153,7 @@ export const store = new Vuex.Store({
         // console.log(decoded);
         axios.post('http://localhost:8000/api/profile', decoded)
           .then(res => {
+            console.log(res.data);
             context.commit('setProfile', res.data);
             resolve(res);
           })

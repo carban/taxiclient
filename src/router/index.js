@@ -6,6 +6,7 @@ import signup from '@/components/signup'
 import login from '@/components/login'
 import map from '@/components/map'
 import profile from '@/components/profile'
+import favorites from '@/components/favorites'
 import refresh from '@/components/refresh'
 
 Vue.use(Router)
@@ -57,6 +58,14 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: favorites,
       meta: {
         requiresAuth: true
       }

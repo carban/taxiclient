@@ -19,6 +19,9 @@
         <router-link :to="{ name: 'profile', params: {} }" class="nav-item nav-link bb">Profile</router-link>
       </div>
       <div v-if="loggedIn" class="">
+        <router-link :to="{ name: 'favorites', params: {} }" class="nav-item nav-link bb">Favorites</router-link>
+      </div>
+      <div v-if="loggedIn" class="">
         <router-link :to="{ name: 'refresh', params: {} }" class="nav-item nav-link bb">Refresh</router-link>
       </div>
     </div>
