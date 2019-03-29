@@ -24,6 +24,8 @@
             <div class="form-group">
               <div>
               <form v-on:submit.prevent="updateProfileInfo()">
+                <b>Basic Data</b>
+                </br>
                 <div class="input-group form-group">
                   <div class="input-group-prepend">
                     <div class="input-group-text">+57</div>
@@ -66,6 +68,8 @@
               </div>
             </div>
             <div class="col-sm-6">
+              <b>Travels Information</b>
+              </br>
               <div class="profileItems">
                 <h4>Travels: 0</h4>
               </div>
@@ -75,6 +79,7 @@
               <div class="profileItems">
                 <h4>Time of travel: 0</h4>
               </div>
+              <img class="aimage" src="@/assets/taxi2.png">
             </div>
           </div>
           </div>
@@ -195,6 +200,10 @@ export default {
 
   .profileItems:hover{
     background-color: #17A2B8;
+  }
+
+  .aimage{
+    margin-top: 50px;
   }
 
 </style>

@@ -173,7 +173,7 @@ export default {
        // }),
        lineOptions: {
          styles: [{color: 'blue', opacity: .7, weight: 4}],
-         missingRouteStyles: [{color: 'black', opacity: 0.15, weight: 7}]
+         missingRouteStyles: [{color: 'lime', opacity: 0.25, weight: 7}]
        }
      }).addTo(mapp)
     });

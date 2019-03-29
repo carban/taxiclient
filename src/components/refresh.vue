@@ -33,14 +33,14 @@ export default {
     }
   },
   created(){
-    // if (this.youllbeawoman) {
-    //   //Lo pongo falso para que no haga n consultas cada vez que se visita la pagina
-    //   this.$store.commit('youllbeawoman');
-    //   const localStore = this.$store;
-    //   setInterval(function() {
-    //     localStore.dispatch('infoMap');
-    //   }, 15 * 1000);
-    // }
+    if (this.youllbeawoman) {
+      //Lo pongo falso para que no haga n consultas cada vez que se visita la pagina
+      this.$store.commit('youllbeawoman');
+      const localStore = this.$store;
+      setInterval(function() {
+        localStore.dispatch('infoMap');
+      }, 15 * 1000);
+    }
   },
   updated(){
     // console.log("COMPUTED: ",this.consultData);

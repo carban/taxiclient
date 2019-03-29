@@ -55,8 +55,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$store.commit("setOrigin", [0, 0]);
-      this.$store.commit("setDestiny", [0, 0]);
+      this.$store.commit("setOrigin", [3.42882159671311, -76.54704415637336]);
+      this.$store.commit("setDestiny", [3.4329340857995096, -76.48538692422893]);
 
       //La redireccion deberia hacerse despues de que se ejecute la promesa
       //Como lo que se hizo en el Login
