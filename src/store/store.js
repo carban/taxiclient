@@ -131,6 +131,7 @@ export const store = new Vuex.Store({
             const token = res.data;
             localStorage.setItem('access_token', token);
             context.commit('tokenMutation', token);
+            const {phone} = jwtDecode(context.getters.token)
             resolve(res);
           })
           .catch(err => {
