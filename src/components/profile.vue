@@ -1,4 +1,4 @@
-<template lang="html">
+  <template lang="html">
   <div class="container prof" id="content">
     <flash-message v-if="flashalert" class="" autoHide variant="success" transitionIn="animated rubberBand"></flash-message>
     <div class="row p-6">
@@ -30,19 +30,22 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">+57</div>
                   </div>
-                  <input type="number" v-model="user.phone" class="form-control" id="inlineFormInputGroupUsername" placeholder="Phone" disabled>
+                  <input type="number" v-model="user.telefonocliente" class="form-control" id="inlineFormInputGroupUsername" placeholder="Phone" disabled>
                 </div>
                 <div class="form-group">
-                  <input type="text" v-model="user.first_name" class="form-control" placeholder="First Name">
+                  <input type="text" v-model="user.nombrecliente" class="form-control" placeholder="First Name">
                 </div>
                 <div class="form-group">
-                  <input type="text" v-model="user.last_name" class="form-control" placeholder="Last Name">
+                  <input type="text" v-model="user.apellidocliente" class="form-control" placeholder="Last Name">
                 </div>
                 <div class="form-group">
-                  <input type="text" v-model="user.email" class="form-control" placeholder="Email">
+                  <input type="text" v-model="user.direccioncliente" class="form-control" placeholder="Direction">
                 </div>
                 <div class="form-group">
-                  <input type="text" v-model="user.credit_card" class="form-control" placeholder="Credit-card Number">
+                  <input type="text" v-model="user.emailcliente" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input type="text" v-model="user.tarjetacliente" class="form-control" placeholder="Credit-card Number">
                 </div>
                 <div class="form-group">
                   <button class="btn btn-outline-success btn-block">Update</button>
@@ -111,10 +114,11 @@ export default {
   methods: {
     updateProfileInfo(){
       var newProfile = {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        credit_card: this.user.credit_card
+        nombrecliente: this.user.nombrecliente,
+        apellidocliente: this.user.apellidocliente,
+        emailcliente: this.user.emailcliente,
+        tarjetacliente: this.user.tarjetacliente,
+        direccioncliente: this.user.direccioncliente
       }
       this.$store.dispatch('updateProfileInfo', newProfile)
         .then(res => {

@@ -10,8 +10,8 @@ export const store = new Vuex.Store({
   state:{
     token: localStorage.getItem('access_token') || null,
     mapdata: [],
-    profile: {first_name: null, last_name: null, phone: null},
-    driverData: {first_name: null, last_name: null, phone: null},
+    profile: {nombrecliente: null, apellidocliente: null, telefonocliente: null},
+    driverData: {nombreconductor: null, apellidoconductor: null, telefonoconducor: null},
     // favorites: {title: null, coor: null},
     // favorites: [
     //   {id: 0, title: 'Casa', coor: [3.4516, -76.5320]},
@@ -185,10 +185,10 @@ export const store = new Vuex.Store({
             var data = res.data;
             var array = []
             for(var i in data){
-              var fid = data[i].favid;
+              var fid = data[i].id_favorito;
               var lat = data[i].geom.coordinates[0];
               var lng = data[i].geom.coordinates[1];
-              var t = data[i].title;
+              var t = data[i].titulo;
               array.push({id: fid, title: t, coor: [lat, lng]});
             }
             context.commit('setFavorites', array);
@@ -248,7 +248,7 @@ export const store = new Vuex.Store({
     cercano: context => {
       axios.post('http://localhost:8000/api/service', {coordenada: context.getters.origin})
         .then(res => {
-          // console.log(res.data.rows[0]);
+          //console.log(res.data.rows[0]);
           context.commit('driverData', res.data.rows[0]);
         })
         .catch(err => {
@@ -264,10 +264,10 @@ export const store = new Vuex.Store({
           for(var i in data){
             var lat = data[i].geom.coordinates[0];
             var lng = data[i].geom.coordinates[1];
-            var fname = data[i].first_name;
-            var lname = data[i].last_name;
-            var phone = data[i].phone;
-            array.push({coor: [lat, lng], fname, lname, phone});
+            //var fname = data[i].first_name;
+            //var lname = data[i].last_name;
+            //var phone = data[i].phone;
+            array.push({coor: [lat, lng]});
           }
           //console.log(array);
           context.commit('mapinfo', array);

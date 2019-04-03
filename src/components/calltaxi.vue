@@ -35,19 +35,23 @@
                   <tbody>
                     <tr>
                       <td>Driver Name: </td>
-                      <td class="tdstyle"><b>{{driverData.first_name}} {{driverData.last_name}}</b></td>
+                      <td class="tdstyle"><b>{{driverData.nombreconductor}} {{driverData.apellidoconductor}}</b></td>
                     </tr>
                     <tr>
                       <td>Driver Phone:</td>
-                      <td class="tdstyle"><b>{{driverData.phone}}</b></td>
+                      <td class="tdstyle"><b>{{driverData.telefonoconductor}}</b></td>
+                    </tr>
+                    <tr>
+                      <td>Vehicle Brand:</td>
+                      <td class="tdstyle"><b>{{driverData.marca}}</b></td>
                     </tr>
                     <tr>
                       <td>Vehicle Model:</td>
-                      <td class="tdstyle"><b>{{taxiData.model}}</b></td>
+                      <td class="tdstyle"><b>{{driverData.modelo}}</b></td>
                     </tr>
                     <tr>
                       <td>Vehicle Plate:</td>
-                      <td class="tdstyle"><b>{{taxiData.plate}}</b></td>
+                      <td class="tdstyle"><b>{{driverData.placa}}</b></td>
                     </tr>
                     <tr>
                       <td>Driver Calification:</td>
@@ -105,8 +109,6 @@ export default {
       price: 0,
       price_per_km : 1000,
       fix: false,
-      //driverData: {first_name: null, last_name: null, phone: null},
-      taxiData: {model: null, plate: null}
     }
   },
   methods: {
