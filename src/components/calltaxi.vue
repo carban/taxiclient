@@ -95,7 +95,7 @@ export default {
     },
     firstTimeForAInterval(){
       var res = this.$store.getters.firstTimeForAInterval;
-      this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
+      //this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
       return res;
     },
     driverData(){
@@ -132,7 +132,7 @@ export default {
       // }
       this.$store.commit('firstTimeForAInterval')
       //AQUI FUNCION PARA TRAER LA INFORMACION DEL CONDUCTOR Y VEHICULO MAS CERCANO
-      this.$store.dispatch('cercano');
+      this.$store.dispatch('near');
       // this.driverData =  {first_name: "fd", last_name: "dfdfd", phone: "fdhfj"};
       this.taxiData = {model: "fgfgf", plate: "dsdsd"};
       // this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);

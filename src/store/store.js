@@ -245,8 +245,8 @@ export const store = new Vuex.Store({
           })
       });
     },
-    cercano: context => {
-      axios.post('http://localhost:8000/api/service', {coordenada: context.getters.origin})
+    near: context => {
+      axios.post('http://localhost:8000/api/near-taxi', {coordenada: context.getters.origin})
         .then(res => {
           //console.log(res.data.rows[0]);
           context.commit('driverData', res.data.rows[0]);
