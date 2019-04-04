@@ -21,6 +21,8 @@ export const store = new Vuex.Store({
     favorites: null,
     origin: [3.42882159671311, -76.54704415637336],
     destiny: [3.4329340857995096, -76.48538692422893],
+    id_tarifa: null,
+    cost_per_km: 0,
     destinyAndTime: [],
     firstTimeForAInterval: true,
     youllbeawoman: true
@@ -47,6 +49,12 @@ export const store = new Vuex.Store({
     },
     destiny: state => {
       return state.destiny;
+    },
+    id_tarifa: state => {
+      return state.id_tarifa;
+    },
+    cost_per_km: state => {
+      return state.cost_per_km;
     },
     destinyAndTime: state => {
       return state.destinyAndTime;
@@ -84,6 +92,12 @@ export const store = new Vuex.Store({
     },
     setDestiny: (state, coor) => {
       state.destiny = coor;
+    },
+    id_tarifa: (state, id) => {
+      state.id_tarifa = id;
+    },
+    cost_per_km: (state, cost) => {
+      state.cost_per_km = cost;
     },
     removeMapdata: state => {
       state.mapdata = [];
@@ -248,8 +262,32 @@ export const store = new Vuex.Store({
     near: context => {
       axios.post('http://localhost:8000/api/near-taxi', {coordenada: context.getters.origin})
         .then(res => {
-          //console.log(res.data.rows[0]);
-          context.commit('driverData', res.data.rows[0]);
+          //console.log(res.data);
+          context.commit('driverData', res.data.theNear[0]);
+          context.commit('cost_per_km', res.data.theRateCost[0].preciokm);
+          context.commit('id_tarifa', res.data.theRateCost[0].id_tarifa);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    service: context => {
+      var obj = {
+        'telefonocliente': jwtDecode(context.getters.token).phone,
+        'telefonoconductor':context.getters.driverData.telefonoconductor,
+        'placa':context.getters.driverData.placa,
+        'id_tarifa': context.getters.id_tarifa,
+        'distancia': context.getters.destinyAndTime[0],
+        'tiempo': context.getters.destinyAndTime[1],
+        'precio':context.getters.cost_per_km*context.getters.destinyAndTime[0],
+        'calificacion': null,
+        'origen_coor':context.getters.origin,
+        'destino_coor':context.getters.destiny
+        };
+        //console.log(obj);
+      axios.post('http://localhost:8000/api/service-notification', obj)
+        .then(res => {
+          //console.log(res.data);
         })
         .catch(err => {
           console.log(err);

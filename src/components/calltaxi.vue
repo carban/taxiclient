@@ -95,11 +95,14 @@ export default {
     },
     firstTimeForAInterval(){
       var res = this.$store.getters.firstTimeForAInterval;
-      //this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
+      this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
       return res;
     },
     driverData(){
       return this.$store.getters.driverData;
+    },
+    price_per_km(){
+      return this.$store.getters.cost_per_km;
     }
   },
   data(){
@@ -107,7 +110,7 @@ export default {
       distance: 0,
       time: 0,
       price: 0,
-      price_per_km : 1000,
+      //price_per_km : 1000,
       fix: false,
     }
   },
@@ -134,13 +137,13 @@ export default {
       //AQUI FUNCION PARA TRAER LA INFORMACION DEL CONDUCTOR Y VEHICULO MAS CERCANO
       this.$store.dispatch('near');
       // this.driverData =  {first_name: "fd", last_name: "dfdfd", phone: "fdhfj"};
-      this.taxiData = {model: "fgfgf", plate: "dsdsd"};
+
       // this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
       // this.distance = Math.floor(haversine(start, end)*100)/100;
       // this.price = Math.trunc(this.distance*this.price_per_km);
     },
     startingTravel(){
-      console.log("holi");
+      this.$store.dispatch('service');
     }
 
   },
