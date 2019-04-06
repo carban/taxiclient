@@ -144,6 +144,7 @@ export default {
     },
     startingTravel(){
       this.$store.dispatch('service');
+      this.$router.push({name: 'traveling'});
     }
 
   },
@@ -173,10 +174,6 @@ export default {
 
   .modal-body{
     padding-top: 0px;
-  }
-
-  select > option{
-    background-color: lime;
   }
 
   #cal{

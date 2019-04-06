@@ -8,6 +8,7 @@ import map from '@/components/map'
 import profile from '@/components/profile'
 import favorites from '@/components/favorites'
 import refresh from '@/components/refresh'
+import traveling from '@/components/traveling'
 
 Vue.use(Router)
 
@@ -74,6 +75,14 @@ export default new Router({
       path: '/refresh',
       name: 'refresh',
       component: refresh,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/traveling',
+      name: 'traveling',
+      component: traveling,
       meta: {
         requiresAuth: true
       }
