@@ -74,6 +74,9 @@ export default {
     destinyCoor(){
       return this.$store.getters.destiny;
     },
+    youllbeawoman(){
+      return this.$store.getters.youllbeawoman;
+    },
     mypolyline() {
       return {
         latlngs: [this.originCoor, this.destinyCoor],
@@ -158,6 +161,14 @@ export default {
     this.$store.dispatch('infoMap');
   },
   created(){
+    if (this.youllbeawoman) {
+      //Lo pongo falso para que no haga n consultas cada vez que se visita la pagina
+      this.$store.commit('youllbeawoman');
+      const localStore = this.$store;
+      setInterval(function() {
+        localStore.dispatch('infoMap');
+      }, 15 * 1000);
+    }
   },
   mounted() {
     this.$nextTick(() => {

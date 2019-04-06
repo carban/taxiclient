@@ -112,8 +112,8 @@ export const store = new Vuex.Store({
     firstTimeForAInterval: (state) => {
       state.firstTimeForAInterval = !state.firstTimeForAInterval;
     },
-    youllbeawoman: (state) => {
-      state.youllbeawoman = !state.youllbeawoman;
+    youllbeawoman: (state, value) => {
+      state.youllbeawoman = value;
     },
     driverData: (state, data) => {
       state.driverData = data;

@@ -9,6 +9,25 @@
 
 <script>
 export default {
+  computed: {
+    youllbeawoman(){
+      return this.$store.getters.youllbeawoman;
+    }
+  },
+  beforeCreate(){
+    this.$store.commit('youllbeawoman', false);
+  },
+  created(){
+    console.log(this.youllbeawoman);
+    if (!this.youllbeawoman) {
+      //Lo pongo falso para que no haga n consultas cada vez que se visita la pagina
+      //this.$store.commit('youllbeawoman');
+      const localStore = this.$store;
+      setInterval(function() {
+        console.log('Pregundando por si se efectual el pago');
+      }, 15 * 1000);
+    }
+  }
 }
 </script>
 

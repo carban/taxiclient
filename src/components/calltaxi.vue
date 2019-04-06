@@ -103,7 +103,10 @@ export default {
     },
     price_per_km(){
       return this.$store.getters.cost_per_km;
-    }
+    },
+    // youllbeawoman(){
+    //   return this.$store.getters.youllbeawoman;
+    // },
   },
   data(){
     return {
@@ -144,6 +147,7 @@ export default {
     },
     startingTravel(){
       this.$store.dispatch('service');
+      // this.$store.commit('youllbeawoman');
       this.$router.push({name: 'traveling'});
     }
 
