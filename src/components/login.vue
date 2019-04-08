@@ -53,7 +53,7 @@ export default {
         .catch(err => {
           console.log(this.err);
           this.err = true;
-          this.flashMe({ message: 'some message', variant: 'danger' });
+          this.flashMe({ message: 'Verify your input', variant: 'danger' });
 
         });
     }

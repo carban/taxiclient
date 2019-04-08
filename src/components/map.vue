@@ -167,7 +167,7 @@ export default {
       const localStore = this.$store;
       setInterval(function() {
         localStore.dispatch('infoMap');
-      }, 15 * 1000);
+      }, 5 * 1000);
     }
   },
   mounted() {

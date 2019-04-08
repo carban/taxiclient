@@ -1,7 +1,7 @@
 <template>
   <div class="divHome">
     <link href="https://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet">
-    <h1 id="title">Univalle Taxi</h1>
+    <h1 id="title">Univalle Taxi Client</h1>
     <img src="@/assets/taxi2.png">
     <router-link :to="{ name: 'login', params: {} }" class="btn btn-warning">Get Started!</router-link>
   </div>

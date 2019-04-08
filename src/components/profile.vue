@@ -74,10 +74,10 @@
               <b>Travels Information</b>
               </br>
               <div class="profileItems">
-                <h4>Travels: 0</h4>
+                <h4>Travels: {{travels.viajes}}</h4>
               </div>
               <div class="profileItems">
-                <h4>KM of travel: 0</h4>
+                <h4>KM of travel: {{travels.kms}}</h4>
               </div>
               <div class="profileItems">
                 <h4>Time of travel: 0</h4>
@@ -99,6 +99,9 @@ export default {
   computed:{
     user(){
       return this.$store.getters.profile;
+    },
+    travels(){
+      return this.$store.getters.travelsinfo;
     }
   },
   data(){

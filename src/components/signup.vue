@@ -70,12 +70,12 @@ export default {
     register(){
       this.$store.dispatch('api_register', this.user)
       .then(response => {
-        this.flashMe({ message: 'some message', variant: 'success' });
+        this.flashMe({ message: 'Registered Successfully', variant: 'success' });
         this.$router.push({name: 'login'});
       })
       .catch(err => {
         this.err = true;
-        this.flashMe({ message: 'some message', variant: 'danger' });
+        this.flashMe({ message: 'Verify your input', variant: 'danger' });
       })
     }
   },

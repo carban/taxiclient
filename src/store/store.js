@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     mapdata: [],
     profile: {nombrecliente: null, apellidocliente: null, telefonocliente: null},
     driverData: {nombreconductor: null, apellidoconductor: null, telefonoconducor: null},
+    travelsinfo: {kms: 0, viajes: 0},
     // favorites: {title: null, coor: null},
     // favorites: [
     //   {id: 0, title: 'Casa', coor: [3.4516, -76.5320]},
@@ -37,6 +38,9 @@ export const store = new Vuex.Store({
     },
     profile: state => {
       return state.profile;
+    },
+    travelsinfo: state => {
+      return state.travelsinfo;
     },
     mapdata: state => {
       return state.mapdata;
@@ -80,6 +84,9 @@ export const store = new Vuex.Store({
     },
     setProfile: (state, pro) => {
       state.profile = pro;
+    },
+    setTravelsinfo: (state, val) => {
+      state.travelsinfo = val;
     },
     setFavorites: (state, fav) => {
       state.favorites = fav;
@@ -127,7 +134,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/signup', credentials)
           .then(res => {
-            console.log(res.data);
+            console.log(res.data.errors);
             resolve(res);
           })
           .catch(err => {
@@ -169,7 +176,8 @@ export const store = new Vuex.Store({
         axios.post('http://localhost:8000/api/profile', decoded)
           .then(res => {
             console.log(res.data);
-            context.commit('setProfile', res.data);
+            context.commit('setProfile', res.data.profileInfo);
+            context.commit('setTravelsinfo', res.data.travelsInfo);
             resolve(res);
           })
           .catch(err => {
