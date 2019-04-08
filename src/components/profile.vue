@@ -11,7 +11,7 @@
             <!-- AQUI -->
             <center>
             <div class="imgcontainer">
-              <img v-bind:src="user.image" alt="Avatar" class="img">
+              <img v-bind:src="user.imagencliente" alt="Avatar" class="img">
               <div class="middle">
                 <b-btn v-b-modal.changePic class="btn btn-warning btn-block">Change Pic</b-btn>
               </div>

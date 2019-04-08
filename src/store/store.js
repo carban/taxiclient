@@ -295,7 +295,7 @@ export const store = new Vuex.Store({
         //console.log(obj);
       axios.post('http://localhost:8000/api/service-notification', obj)
         .then(res => {
-          //console.log(res.data);
+          console.log(res.data.msg);
         })
         .catch(err => {
           console.log(err);

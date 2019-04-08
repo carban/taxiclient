@@ -148,7 +148,7 @@ export default {
     startingTravel(){
       this.$store.dispatch('service');
       // this.$store.commit('youllbeawoman');
-      this.$router.push({name: 'traveling'});
+      this.$router.push({name: 'finish'});
     }
 
   },

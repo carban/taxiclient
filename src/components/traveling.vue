@@ -2,6 +2,7 @@
   <div class="">
     <center><h1>TRAVELING...</h1></center>
     <img src="https://media.giphy.com/media/WiRSc43NGmDo4/giphy-downsized-large.gif" alt="">
+    {{driverData.nombreconductor}}
   </div>
 
 
@@ -12,10 +13,13 @@ export default {
   computed: {
     youllbeawoman(){
       return this.$store.getters.youllbeawoman;
+    },
+    driverData(){
+      return this.$store.getters.driverData;
     }
   },
   beforeCreate(){
-    this.$store.commit('youllbeawoman', false);
+    //this.$store.commit('youllbeawoman', false);
   },
   created(){
     console.log(this.youllbeawoman);

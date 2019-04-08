@@ -9,6 +9,7 @@ import profile from '@/components/profile'
 import favorites from '@/components/favorites'
 import refresh from '@/components/refresh'
 import traveling from '@/components/traveling'
+import finish from '@/components/finish'
 
 Vue.use(Router)
 
@@ -83,6 +84,14 @@ export default new Router({
       path: '/traveling',
       name: 'traveling',
       component: traveling,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/finish',
+      name: 'finish',
+      component: finish,
       meta: {
         requiresAuth: true
       }

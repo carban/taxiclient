@@ -163,7 +163,7 @@ export default {
   created(){
     if (this.youllbeawoman) {
       //Lo pongo falso para que no haga n consultas cada vez que se visita la pagina
-      this.$store.commit('youllbeawoman');
+      this.$store.commit('youllbeawoman', false);
       const localStore = this.$store;
       setInterval(function() {
         localStore.dispatch('infoMap');
