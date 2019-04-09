@@ -53,11 +53,11 @@
                 </form>
 
               <b-btn v-b-modal.changePassword class="btn btn-outline-warning btn-block">Change password</b-btn>
-              <b-modal id="changePassword" title="Change your password" @ok="">
+              <b-modal id="changePassword" title="Change your password" @ok="newPassword">
                 <div class="form-group">
-                  <input class="form-control" type="password" name="" value="" placeholder="New Password">
+                  <input v-model='newpassword' class="form-control" type="password" name="" value="" placeholder="New Password">
                   </br>
-                  <input class="form-control" type="password" name="" value="" placeholder="Confirm Password">
+                  <input v-model='confirmpassword' class="form-control" type="password" name="" value="" placeholder="Confirm Password">
                 </div>
               </b-modal>
 
@@ -106,7 +106,9 @@ export default {
   },
   data(){
     return{
-      flashalert: false
+      flashalert: false,
+      newpassword: '',
+      confirmpassword: ''
     }
   },
   beforeCreate(){
@@ -132,12 +134,24 @@ export default {
               this.flashMe({ message: 'Profile Updated', variant: 'success' });
             })
         })
+    },
+    newPassword(){
+      if (this.newpassword == this.confirmpassword) {
+        this.$store.dispatch('changePassword', {new_pass:this.newpassword})
+          .then(res => {
+            this.newpassword = '';
+            this.confirmpassword = '';
+            this.flashalert = true;
+            this.flashMe({ message: 'Password Updated', variant: 'success' });
+          })
+      }
+
     }
   },
   updated(){
     setTimeout(() => {
       this.flashalert = false;
-    }, 2000);
+    }, 4000);
   }
 }
 </script>

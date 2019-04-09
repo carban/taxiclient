@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                       <td>Driver Calification:</td>
-                      <td class="tdstyle"><b id="cal">* * * * *</b></td>
+                      <td class="tdstyle"><b id="cal">{{driver_calification}}</b></td>
                     </tr>
                     <tr>
                       <td>Distance:</td>
@@ -96,6 +96,7 @@ export default {
     firstTimeForAInterval(){
       var res = this.$store.getters.firstTimeForAInterval;
       this.price = Math.trunc(this.destinyAndTime[0]*this.price_per_km);
+      this.$store.commit('price_service', this.price);
       return res;
     },
     driverData(){
@@ -103,6 +104,9 @@ export default {
     },
     price_per_km(){
       return this.$store.getters.cost_per_km;
+    },
+    driver_calification(){
+      return this.$store.getters.driver_calification;
     },
     // youllbeawoman(){
     //   return this.$store.getters.youllbeawoman;

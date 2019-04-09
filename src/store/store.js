@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
     profile: {nombrecliente: null, apellidocliente: null, telefonocliente: null},
     driverData: {nombreconductor: null, apellidoconductor: null, telefonoconducor: null},
     travelsinfo: {kms: 0, viajes: 0},
+    driver_calification: 0,
     // favorites: {title: null, coor: null},
     // favorites: [
     //   {id: 0, title: 'Casa', coor: [3.4516, -76.5320]},
@@ -24,6 +25,7 @@ export const store = new Vuex.Store({
     destiny: [3.4329340857995096, -76.48538692422893],
     id_tarifa: null,
     cost_per_km: 0,
+    price_service: 0,
     destinyAndTime: [],
     firstTimeForAInterval: true,
     youllbeawoman: true
@@ -59,6 +61,12 @@ export const store = new Vuex.Store({
     },
     cost_per_km: state => {
       return state.cost_per_km;
+    },
+    price_service: state => {
+      return state.price_service;
+    },
+    driver_calification: state => {
+      return state.driver_calification;
     },
     destinyAndTime: state => {
       return state.destinyAndTime;
@@ -105,6 +113,12 @@ export const store = new Vuex.Store({
     },
     cost_per_km: (state, cost) => {
       state.cost_per_km = cost;
+    },
+    price_service: (state, price) => {
+      state.price_service = price;
+    },
+    driver_calification: (state, val) => {
+      state.driver_calification = val;
     },
     removeMapdata: state => {
       state.mapdata = [];
@@ -178,6 +192,7 @@ export const store = new Vuex.Store({
             console.log(res.data);
             context.commit('setProfile', res.data.profileInfo);
             context.commit('setTravelsinfo', res.data.travelsInfo);
+
             resolve(res);
           })
           .catch(err => {
@@ -190,6 +205,18 @@ export const store = new Vuex.Store({
         const decoded = jwtDecode(context.getters.token);
         const object = {newProfile: newProfile, phone: decoded.phone}
         axios.post('http://localhost:8000/api/update-profile', object)
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          })
+      });
+    },
+    changePassword: (context, obj) => {
+      return new Promise((resolve, reject) => {
+        const decoded = jwtDecode(context.getters.token);
+        axios.post('http://localhost:8000/api/change-password', {phone: decoded.phone, pass:obj.new_pass})
           .then(res => {
             resolve(res);
           })
@@ -274,6 +301,7 @@ export const store = new Vuex.Store({
           context.commit('driverData', res.data.theNear[0]);
           context.commit('cost_per_km', res.data.theRateCost[0].preciokm);
           context.commit('id_tarifa', res.data.theRateCost[0].id_tarifa);
+          context.commit('driver_calification', Math.round(res.data.prom[0].promedio_cal));
         })
         .catch(err => {
           console.log(err);
@@ -300,6 +328,22 @@ export const store = new Vuex.Store({
         .catch(err => {
           console.log(err);
         })
+    },
+    doCalification: (context, calification) => {
+      return new Promise((resolve, reject) => {
+        //console.log(context.getters.token);
+        const decoded = jwtDecode(context.getters.token);
+        const driverphone = context.getters.driverData.telefonoconductor;
+        const object = {phonecli: decoded.phone, phonedri: driverphone, cali:calification};
+        axios.post('http://localhost:8000/api/service-calification', object)
+          .then(res => {
+            console.log(res.data);
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          })
+      });
     },
     infoMap: context => {
       axios.get('http://localhost:8000/api/map/info')
