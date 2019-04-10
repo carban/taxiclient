@@ -9,9 +9,9 @@
       <div v-if="!loggedIn" class="">
         <router-link :to="{ name: 'home', params: {} }" class="nav-item nav-link active bb">Home</router-link>
       </div>
-      <div v-if="!loggedIn" class="">
+      <!-- <div v-if="!loggedIn" class="">
         <router-link :to="{ name: 'about', params: {} }" class="nav-item nav-link bb">About</router-link>
-      </div>
+      </div> -->
       <div v-if="loggedIn" class="">
         <router-link :to="{ name: 'map', params: {} }" class="nav-item nav-link bb">map</router-link>
       </div>

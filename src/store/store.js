@@ -225,6 +225,18 @@ export const store = new Vuex.Store({
           })
       });
     },
+    changePicture: (context, obj) => {
+      return new Promise((resolve, reject) => {
+        const decoded = jwtDecode(context.getters.token);
+        axios.post('http://localhost:8000/api/change-pic', {phone: decoded.phone, pic:obj.new_pic})
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          })
+      });
+    },
     favoritesInfo: context => {
       return new Promise((resolve, reject) => {
         console.log('Favorites consulted');

@@ -59,13 +59,15 @@ export default {
       }
     },
     finishAndCal(){
-      this.$store.dispatch('doCalification', {cal: this.calification})
-      .then(response => {
-        this.$router.push({name: 'profile'})
-      })
-      .catch(err => {
-
-      })
+      if (this.calification != 0) {
+        this.$store.dispatch('doCalification', {cal: this.calification})
+        .then(response => {
+          this.$router.push({name: 'profile'})
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
     }
   }
 

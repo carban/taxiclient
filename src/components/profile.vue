@@ -62,9 +62,9 @@
               </b-modal>
 
 
-              <b-modal id="changePic" title="Change your Profile pic" @ok="">
+              <b-modal id="changePic" title="Change your Profile pic" @ok="changePic">
                 <div class="form-group">
-                  <input class="form-control" type="text" name="" value="" placeholder="New Url">
+                  <input v-model="new_pic" class="form-control" type="text" name="" value="" placeholder="New Url">
                 </div>
               </b-modal>
                 </div>
@@ -108,7 +108,8 @@ export default {
     return{
       flashalert: false,
       newpassword: '',
-      confirmpassword: ''
+      confirmpassword: '',
+      new_pic: ''
     }
   },
   beforeCreate(){
@@ -146,6 +147,14 @@ export default {
           })
       }
 
+    },
+    changePic(){
+      this.$store.dispatch('changePicture', {new_pic:this.new_pic})
+        .then(res => {
+          this.new_pic = '';
+          this.flashalert = true;
+          this.flashMe({ message: 'pic Updated', variant: 'success' });
+        })
     }
   },
   updated(){
