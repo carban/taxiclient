@@ -79,9 +79,9 @@
               <div class="profileItems">
                 <h4>KM of travel: {{travels.kms}}</h4>
               </div>
-              <div class="profileItems">
+              <!-- <div class="profileItems">
                 <h4>Time of travel: 0</h4>
-              </div>
+              </div> -->
               <img class="aimage" src="@/assets/taxi2.png">
             </div>
           </div>
